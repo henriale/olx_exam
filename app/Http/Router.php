@@ -39,40 +39,45 @@ class Router implements RouterInterface
     public function matchAction(string $uri, string $method = Request::METHOD_GET)
     {
         foreach ($this->routes as $mask => $value) {
-            if (preg_match_all("/:([\w%]+)/", $mask)) {
-                $a = array_filter(explode('/', $uri));
-                $b = array_filter(explode('/', $mask));
-
-                if (count($a) !== count($b)) {
-                    continue;
-                }
-
-                if (! isset($this->routes[$mask][$method])) {
-                    continue;
-                }
-
-                $parsedParams = [];
-
-                foreach ($b as $index => $d) {
-                    if ($d != $a[$index]) {
-                        if (substr($b[$index], 0, 1) != ':') {
-                            $parsedParams = [];
-                            continue;
-                        }
-                    }
-
-                    if (substr($b[$index], 0, 1) === ':') {
-                        $parsedParams[substr($b[$index], 1)] = $a[$index];
-                    }
-                }
-
+            if (! preg_match_all("/:([\w%]+)/", $mask)) {
                 $uriPattern = $mask;
-                $this->request->setUrlParameters($parsedParams);
             }
+
+            $a = array_filter(explode('/', $uri));
+            $b = array_filter(explode('/', $mask));
+
+            if (count($a) !== count($b)) {
+                continue;
+            }
+
+            if (! isset($this->routes[$mask][$method])) {
+                continue;
+            }
+
+            $parsedParams = [];
+
+            foreach ($b as $index => $d) {
+                if ($d != $a[$index]) {
+                    if (substr($b[$index], 0, 1) != ':') {
+                        $parsedParams = [];
+                        continue;
+                    }
+                }
+
+                if (substr($b[$index], 0, 1) === ':') {
+                    $parsedParams[substr($b[$index], 1)] = $a[$index];
+                }
+            }
+
+            $uriPattern = $mask;
+            $this->request->setUrlParameters($parsedParams);
         }
 
-        if (! isset($this->routes[$uriPattern]) || ! isset($this->routes[$uriPattern][$method])) {
-            return $this->routes['404'];
+        if (
+            ! array_key_exists(@$uriPattern, $this->routes)
+            || ! array_key_exists($method, $this->routes[@$uriPattern])
+        ) {
+            return $this->routes['/404'];
         }
 
         return $this->routes[$uriPattern][$method];
