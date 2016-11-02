@@ -5,7 +5,7 @@ namespace Base\Controllers;
 use App\Http\Request;
 use App\Http\Response;
 
-class Controller
+class HttpErrorsController
 {
     /**
      * @var \App\Http\Response $response
@@ -32,8 +32,8 @@ class Controller
      *
      * @return array
      */
-    public function index()
+    public function error404()
     {
-        $this->response->json([]);
+        $this->response->json(['error' => 404, 'message' => 'not found']);
     }
 }
