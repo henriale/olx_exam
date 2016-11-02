@@ -1,0 +1,27 @@
+{
+  "name": "henriale/olx",
+  "description": "OLX exam project",
+  "keywords": ["exam"],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": ">=7.0",
+    "php-di/php-di": "5.4.0"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "": "modules/"
+    },
+    "classmap": []
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}
