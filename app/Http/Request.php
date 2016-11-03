@@ -32,4 +32,23 @@ class Request extends BaseRequest implements RequestInterface
     {
         $this->query->add($params);
     }
+
+    /**
+     * @param bool $asResource
+     *
+     * @return mixed|resource|string
+     */
+    public function getContent($asResource = false)
+    {
+        $content = parent::getContent($asResource);
+
+        if ($this->getContentType() == 'json') {
+            $content = preg_replace('/(\v|\s)+/', '', $content);
+            $content = json_decode($content, true);
+
+            $this->request->add($content);
+        }
+
+        return $content;
+    }
 }

@@ -3,10 +3,10 @@
 namespace App\Http;
 
 use App\Contracts\Http\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
-class Response implements ResponseInterface
+class Response extends BaseResponse implements ResponseInterface
 {
-
     /**
      * @param array $content
      *
