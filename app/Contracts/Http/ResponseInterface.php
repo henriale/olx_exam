@@ -10,11 +10,4 @@ interface ResponseInterface
      * @return mixed
      */
     public function json(array $content);
-
-    /**
-     * @param array $header
-     *
-     * @return \App\Contracts\Http\ResponseInterface
-     */
-    public function header(array $header);
 }

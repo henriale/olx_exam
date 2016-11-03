@@ -16,14 +16,4 @@ class Response implements ResponseInterface
     {
         print json_encode($content);
     }
-
-    /**
-     * @param array $header
-     *
-     * @return \App\Contracts\Http\ResponseInterface
-     */
-    public function header(array $header)
-    {
-        // TODO: Implement header() method.
-    }
 }

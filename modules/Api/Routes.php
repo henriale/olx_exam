@@ -16,7 +16,6 @@ class Routes implements RoutesInterface
         return [
             '/users' => [
                 Request::METHOD_GET => [UserController::class, 'findAll'],
-                Request::METHOD_POST => [UserController::class, 'create'],
             ],
             '/users/:id' => [
                 Request::METHOD_GET => [UserController::class, 'find'],
