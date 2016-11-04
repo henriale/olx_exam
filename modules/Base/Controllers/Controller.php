@@ -14,7 +14,7 @@ class Controller
     /**
      * @var \App\Http\Request $request
      */
-    private $request;
+    protected $request;
 
     /**
      * Controller constructor.

@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+
+use App\Http\Request;
 use DI\ContainerBuilder;
 
 /**
@@ -14,21 +16,26 @@ class Kernel
      * @var array $modules
      */
     protected $modules;
-
     /**
      * @var \App\Contracts\Http\RouterInterface $router
      */
     protected $router;
-
     /**
      * @var \App\Contracts\Http\RequestInterface $request
      */
     protected $request;
-
     /**
      * @var \DI\Container $container
      */
     protected $container;
+    /**
+     * @var \PDO $dbConnection
+     */
+    protected $dbConnection;
+    /**
+     * @var \App\Kernel
+     */
+    protected static $instance;
 
     /**
      * Kernel constructor.
@@ -43,11 +50,17 @@ class Kernel
 
         $this->request = $this->validateAndGetConfigItem($config, 'request');
 
-        $this->container = ContainerBuilder::buildDevContainer();
+        $containerBuilder = new ContainerBuilder;
+        $containerBuilder->addDefinitions([Request::class => $this->request]);
+        $this->container = $containerBuilder->build();
+
+        $database = $this->validateAndGetConfigItem($config, 'database');
+        $this->dbConnection = $database->connect();
 
         $this->router->setRequestHandler($this->request);
         $this->registerModulesRoutes();
 
+        self::$instance = $this;
     }
 
     /**
@@ -105,5 +118,21 @@ class Kernel
         }
 
         return null;
+    }
+
+    /**
+     * @return \PDO
+     */
+    public function getDatabaseConnection() : \PDO
+    {
+        return $this->dbConnection;
+    }
+
+    /**
+     * @return \App\Kernel
+     */
+    public static function getInstance()
+    {
+        return self::$instance;
     }
 }

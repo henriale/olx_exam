@@ -3,10 +3,10 @@
 namespace App\Http;
 
 use App\Contracts\Http\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
-class Response implements ResponseInterface
+class Response extends BaseResponse implements ResponseInterface
 {
-
     /**
      * @param array $content
      *
@@ -15,15 +15,5 @@ class Response implements ResponseInterface
     public function json(array $content)
     {
         print json_encode($content);
-    }
-
-    /**
-     * @param array $header
-     *
-     * @return \App\Contracts\Http\ResponseInterface
-     */
-    public function header(array $header)
-    {
-        // TODO: Implement header() method.
     }
 }
