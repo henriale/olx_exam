@@ -39,7 +39,14 @@ class UserController extends Controller
     {
         $user = new User();
 
-        if ($user->update($id, $this->request->getContent())) {
+        try {
+            $updated = $user->update($id, $this->request->getContent());
+        } catch (\InvalidArgumentException $e) {
+            $message = $e->getMessage();
+            $statusCode = $e->getCode();
+        }
+
+        if ($updated) {
             $message = 'User succesfully updated';
             $statusCode = 200;
         }

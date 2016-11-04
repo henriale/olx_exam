@@ -20,6 +20,10 @@ class Model implements ModelInterface
      * @var MySqlBuilder $queryBuilder
      */
     protected $queryBuilder;
+    /**
+     * @var string $attributes
+     */
+    protected $attributes;
 
     /**
      * Model constructor.
@@ -74,6 +78,8 @@ class Model implements ModelInterface
      */
     public function update(int $id, array $attributes) : bool
     {
+        $this->checkAttributes($attributes);
+
         $query = $this->queryBuilder->update($this->table, $attributes);
         $query->where()->equals('id', $id);
 
@@ -81,5 +87,34 @@ class Model implements ModelInterface
 
         return $this->connection->prepare($sql)
             ->execute($this->queryBuilder->getValues());
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return bool
+     */
+    protected function validAttributes(array $attributes) : bool
+    {
+        foreach ($this->attributes as $validAttribute) {
+            foreach ($attributes as $key => $attribute) {
+                if ($attribute === $validAttribute) {
+                    unset($attributes[$key]);
+                    continue 2;
+                }
+            }
+        }
+
+        return ! $attributes;
+    }
+
+    /**
+     * @param array $attributes
+     */
+    protected function checkAttributes(array $attributes) : void
+    {
+        if (!$this->validAttributes($attributes)) {
+            throw new \InvalidArgumentException('Attribute does not exist', 500);
+        }
     }
 }
