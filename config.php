@@ -33,4 +33,9 @@ return $config = [
      *
      */
     'session' => new \App\Http\Session(),
+
+    /**
+     *
+     */
+    'database' => new App\Database\Database('192.168.10.200', 'olx', 'homestead', 'secret'),
 ];
