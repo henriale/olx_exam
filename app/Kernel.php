@@ -82,19 +82,6 @@ class Kernel
     /**
      *
      */
-    public function run()
-    {
-        $this->container->call(
-            $this->router->matchAction(
-                $this->request->getUri(),
-                $this->request->getMethod()
-            ), $this->request->getUrlParameters()
-        );
-    }
-
-    /**
-     *
-     */
     protected function registerModulesRoutes()
     {
         foreach ($this->modules as $moduleRoot) {
@@ -121,6 +108,19 @@ class Kernel
     }
 
     /**
+     *
+     */
+    public function run()
+    {
+        $this->container->call(
+            $this->router->matchAction(
+                $this->request->getUri(),
+                $this->request->getMethod()
+            ), $this->request->getUrlParameters()
+        );
+    }
+
+    /**
      * @return \PDO
      */
     public function getDatabaseConnection() : \PDO
@@ -131,7 +131,7 @@ class Kernel
     /**
      * @return \App\Kernel
      */
-    public static function getInstance()
+    public static function getInstance() : Kernel
     {
         return self::$instance;
     }

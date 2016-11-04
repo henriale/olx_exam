@@ -10,7 +10,7 @@ class Request extends BaseRequest implements RequestInterface
     /**
      * @return string
      */
-    public function getUri()
+    public function getUri() : string
     {
         return $this->getPathInfo();
     }
@@ -18,7 +18,7 @@ class Request extends BaseRequest implements RequestInterface
     /**
      * @return array
      */
-    public function getUrlParameters()
+    public function getUrlParameters() : array
     {
         return (array) $this->query->all();
     }

@@ -91,6 +91,16 @@ class Model implements ModelInterface
 
     /**
      * @param array $attributes
+     */
+    protected function checkAttributes(array $attributes)
+    {
+        if (!$this->validAttributes($attributes)) {
+            throw new \InvalidArgumentException('Attribute does not exist', 500);
+        }
+    }
+
+    /**
+     * @param array $attributes
      *
      * @return bool
      */
@@ -106,15 +116,5 @@ class Model implements ModelInterface
         }
 
         return ! $attributes;
-    }
-
-    /**
-     * @param array $attributes
-     */
-    protected function checkAttributes(array $attributes) : void
-    {
-        if (!$this->validAttributes($attributes)) {
-            throw new \InvalidArgumentException('Attribute does not exist', 500);
-        }
     }
 }
