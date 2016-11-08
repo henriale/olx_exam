@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+    php7:
+        build:
+            context: ./php7
+        volumes:
+            - ../:/var/www
+        expose:
+            - "9000"
+
+    nginx:
+        build:
+            context: ./nginx
+        volumes:
+            - ../:/var/www
+        ports:
+            - "80:80"
+        links:
+            - php7
+
+    mysql:
+        build: ./mysql
+        volumes:
+            - ./mysql/dumps:/docker-entrypoint-initdb.d
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: homestead
+            MYSQL_USER: homestead
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
