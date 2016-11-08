@@ -7,6 +7,10 @@
 Wasn't provided any deadline, so I took about 10 hours to build a basic framework
 and, if you find necessary, we can discuss about the improvements and I show the better solution in my opinion.
 
+#### Running
+- Point nginx to /web/index.php file
+- configure the database on /config.php file
+
 #### What's missing?
 - Middlewares - One of the most important features the framework should have. it would, however, take a little longer
 - Environment variables - Useful for scalability
@@ -22,6 +26,8 @@ and, if you find necessary, we can discuss about the improvements and I show the
 - Application Kernel from scratch
 - Structure based on modularization
 - Basic modeling class
+- IoC on controllers methods
+- Basic JSON API
 
 ## API
 - GET users - show all users
