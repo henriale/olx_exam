@@ -9,8 +9,6 @@ return $config = [
 
     /**
      * Modules namespace root for early loading.
-     *
-     * @todo: Find out automatically and use this attribute for custom modules
      */
     'modules' => [
         'Base',
@@ -37,5 +35,5 @@ return $config = [
     /**
      *
      */
-    'database' => new App\Database\Database('192.168.10.200', 'olx', 'homestead', 'secret'),
+    'database' => new App\Database\Database('192.168.99.100', 'homestead', 'homestead', 'secret'),
 ];
