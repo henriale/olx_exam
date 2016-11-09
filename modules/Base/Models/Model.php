@@ -108,7 +108,7 @@ class Model implements ModelInterface
     {
         foreach ($this->attributes as $validAttribute) {
             foreach ($attributes as $key => $attribute) {
-                if ($attribute === $validAttribute) {
+                if ($key === $validAttribute) {
                     unset($attributes[$key]);
                     continue 2;
                 }

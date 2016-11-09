@@ -3,6 +3,14 @@
 require '../vendor/autoload.php';
 require '../config.php';
 
-$kernel = new \App\Kernel($config);
+try {
+    $kernel = new \App\Kernel($config);
+    $kernel->run();
+} catch (\Exception $exception) {
+    $caught = $config['exception_handler']->handle($exception);
 
-$kernel->run();
+    if (! $caught) {
+        // output exception when debug in on
+        throw $exception;
+    }
+}

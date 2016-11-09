@@ -45,9 +45,13 @@ $ docker-compose up -d
 - Basic JSON API
 - Easy docker deployment
 - Simple environment variable setup
+- Http Exception handling
 
 ## API
 - GET users - show all users
 - GET users/:id - show specific user
 - PUT users/:id - update specific user
 - DELETE users/:id - update specific user
+
+[Postman Collection](https://www.getpostman.com/collections/1f9562e9a7773962a6f2)
+ 

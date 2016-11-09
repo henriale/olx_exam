@@ -7,7 +7,11 @@ use Base\Models\Model;
 class User extends Model
 {
     /**
-     * @var string
+     * @var string $table
      */
     protected $table = 'users';
+
+    protected $attributes = [
+        'name', 'address', 'picture'
+    ];
 }
