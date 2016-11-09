@@ -42,4 +42,9 @@ return $config = [
         getenv('DB_USERNAME'),
         getenv('DB_PASSWORD')
     ),
+
+    /**
+     *
+     */
+    'exception_handler' => new App\Exceptions\Handler(),
 ];
