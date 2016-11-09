@@ -1,4 +1,5 @@
 <?php
+(new \Dotenv\Dotenv(__DIR__))->load();
 
 return $config = [
     /**
@@ -35,5 +36,10 @@ return $config = [
     /**
      *
      */
-    'database' => new App\Database\Database('192.168.99.100', 'homestead', 'homestead', 'secret'),
+    'database' => new App\Database\Database(
+        getenv('DB_HOST'),
+        getenv('DB_DATABASE'),
+        getenv('DB_USERNAME'),
+        getenv('DB_PASSWORD')
+    ),
 ];

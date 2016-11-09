@@ -4,22 +4,37 @@
 - [StackOverflow profile](http://stackoverflow.com/users/4707820/henriale)
 
 ## About the exam
-Wasn't provided any deadline, so I took about 10 hours to build a basic framework
-and, if you find necessary, we can discuss about the improvements and I show the better solution in my opinion.
+The application shows a basic setup for an REST API.<br>
+It's easily scalable and supports both template engine and json response.
 
 #### Running
-- Point nginx to /web/index.php file
-- configure the database on /config.php file
+make sure you have a docker machine created, then:
+
+###### Download and install 
+```bash
+$ git clone git@gitlab.com:henriale/olx.git
+$ cd olx
+$ composer install
+```
+
+###### Setup environment
+```bash
+$ cp .env.example .env
+# then, fill out your environment information
+$ vim .env
+```
+
+###### Run server
+```bash
+$ cd .docker
+$ docker-compose stop
+$ docker-compose up -d
+``` 
 
 #### What's missing?
-- Middlewares - One of the most important features the framework should have. it would, however, take a little longer
-- Environment variables - Useful for scalability
+- Middlewares
 - API Authentication & throttling
-- Events - I am an adept of Event Driven Development, but it was out this time
-- Exporting modules to separated packages
-- Docker Deployment - It's a really modern tool but I haven't learned yet
-- Database Migration
-- The file uploading - I run out of time before implementing it
+- The file uploading
 
 #### What was done?
 - Resource routing from scratch
@@ -28,17 +43,11 @@ and, if you find necessary, we can discuss about the improvements and I show the
 - Basic modeling class
 - IoC on controllers methods
 - Basic JSON API
+- Easy docker deployment
+- Simple environment variable setup
 
 ## API
 - GET users - show all users
 - GET users/:id - show specific user
 - PUT users/:id - update specific user
 - DELETE users/:id - update specific user
-
-##### The framework was inspired in:
-- Laravel
-- Lumen
-- Symfony
-- Phalcon
-- Slim
-- Express JS

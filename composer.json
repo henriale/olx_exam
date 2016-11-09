@@ -8,7 +8,8 @@
     "php": ">=7.0",
     "php-di/php-di": "5.4.0",
     "symfony/http-foundation": "3.1.x-dev",
-    "nilportugues/sql-query-builder": "1.5.0"
+    "nilportugues/sql-query-builder": "1.5.0",
+    "vlucas/phpdotenv": "^2.4"
   },
   "require-dev": {
     "symfony/var-dumper": "3.1.x-dev"
