@@ -9,6 +9,22 @@ It's easily scalable and supports both template engine and json response.
 
 #### Running
 make sure you have a docker machine created, then:
+
+###### Download and install 
+```bash
+$ git clone git@gitlab.com:henriale/olx.git
+$ cd olx
+$ composer install
+```
+
+###### Setup environment
+```bash
+$ cp .env.example .env
+# then, fill out your environment information
+$ vim .env
+```
+
+###### Run server
 ```bash
 $ cd .docker
 $ docker-compose stop
