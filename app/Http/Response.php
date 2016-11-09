@@ -16,4 +16,14 @@ class Response extends BaseResponse implements ResponseInterface
     {
         print json_encode($content);
     }
+
+    /**
+     * @param array $content
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function setContent($content)
+    {
+        return parent::setContent(json_encode($content));
+    }
 }
