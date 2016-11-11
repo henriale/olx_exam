@@ -25,4 +25,11 @@ interface RequestInterface
      * @return void
      */
     public function setUrlParameters(array $params);
+
+    /**
+     * @param \App\Contracts\Http\EnvelopeInterface $envelope
+     *
+     * @return bool
+     */
+    public function hasValidEnvelope(EnvelopeInterface $envelope) : bool;
 }

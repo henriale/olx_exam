@@ -5,9 +5,14 @@ namespace App\Contracts\Http;
 interface ResponseInterface
 {
     /**
-     * @param array $content
+     * @param \App\Contracts\Http\EnvelopeInterface $envelope
      *
-     * @return mixed
+     * @return \App\Contracts\Http\ResponseInterface
      */
-    public function json(array $content);
+    public function setEnvelope(EnvelopeInterface $envelope) : ResponseInterface;
+
+    /**
+     * @return \App\Contracts\Http\EnvelopeInterface
+     */
+    public function getEnvelope() : EnvelopeInterface;
 }
