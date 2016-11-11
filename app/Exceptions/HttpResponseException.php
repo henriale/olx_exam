@@ -17,9 +17,9 @@ class HttpResponseException extends \Exception
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getContent()
+    public function getContent() : array
     {
         return ['message' => $this->message];
     }
