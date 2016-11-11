@@ -20,6 +20,7 @@ class Routes implements RoutesInterface
             '/users/:id' => [
                 Request::METHOD_GET => [UserController::class, 'find'],
                 Request::METHOD_PUT => [UserController::class, 'update'],
+                Request::METHOD_POST => [UserController::class, 'formUpdate'],
                 Request::METHOD_DELETE => [UserController::class, 'delete'],
             ],
         ];

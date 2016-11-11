@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Contracts\Http\EnvelopeInterface;
 use App\Contracts\Http\RequestInterface;
+use App\Exceptions\BadRequestException;
 use Symfony\Component\HttpFoundation\Request as BaseRequest;
 
 class Request extends BaseRequest implements RequestInterface
@@ -46,9 +48,42 @@ class Request extends BaseRequest implements RequestInterface
             $content = preg_replace('/(\v|\s)+/', '', $content);
             $content = json_decode($content, true);
 
-            $this->request->add($content);
+            $this->request->add((array) $content);
         }
 
         return $content;
+    }
+
+    /**
+     * @param \App\Contracts\Http\EnvelopeInterface $envelope
+     *
+     * @return bool
+     * @throws \App\Exceptions\BadRequestException
+     */
+    public function hasValidEnvelope(EnvelopeInterface $envelope) : bool
+    {
+        $valid = true;
+
+        foreach ($envelope->getHeader() as $envelopeKey => $envelopeHeader) {
+            $valid = false;
+
+            foreach ($this->headers->all() as $key => $headers) {
+                foreach (explode(';', reset($headers)) as $header) {
+                    if (
+                        strtolower($key) == strtolower($envelopeKey)
+                        && strtolower($header) == strtolower($envelopeHeader)
+                    ) {
+                        $valid = true;
+                        continue 2;
+                    }
+                }
+            }
+        }
+
+        if (! $valid) {
+            throw new BadRequestException('Invalid header');
+        }
+
+        return $valid;
     }
 }
