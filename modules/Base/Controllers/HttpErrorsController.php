@@ -2,6 +2,7 @@
 
 namespace Base\Controllers;
 
+use App\Exceptions\NotFoundException;
 use App\Http\Request;
 use App\Http\Response;
 
@@ -29,11 +30,10 @@ class HttpErrorsController
     }
 
     /**
-     *
-     * @return array
+     * @throws \App\Exceptions\NotFoundException
      */
     public function error404()
     {
-        $this->response->json(['error' => 404, 'message' => 'not found']);
+        throw new NotFoundException('Page not found');
     }
 }
