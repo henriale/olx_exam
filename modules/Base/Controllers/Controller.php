@@ -4,7 +4,6 @@ namespace Base\Controllers;
 
 use App\Http\Request;
 use App\Http\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class Controller
 {
@@ -25,8 +24,6 @@ class Controller
      */
     public function __construct(Response $response, Request $request)
     {
-        $response->headers = new ResponseHeaderBag(['Content-Type' => 'application/json']);
-
         $this->response = $response;
         $this->request = $request;
     }
@@ -37,6 +34,6 @@ class Controller
      */
     public function index()
     {
-        $this->response->json([]);
+        return $this->response->setStatusCode(204)->sendHeaders();
     }
 }
