@@ -1,4 +1,11 @@
-The application shows a basic setup for an REST API.<br>
+### Why?
+
+This application was built as part of a selection <br>
+process for a developer position in a great company.
+
+#### Description
+
+The application shows a basic setup for a REST API.<br>
 It's easily scalable and supports both template engine and json response.
 
 #### Running
